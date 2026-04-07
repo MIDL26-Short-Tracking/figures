@@ -1,0 +1,70 @@
+(/mnt/ceph-ssd/workspaces/ws/nim00020/u14148-MIDL/baseline/old_generalist/conda_env) [nim00020] u14148@ggpu102 scripts $ python eval_combined.py 
+
+============================================================
+Processing epoch None: None
+============================================================
+Loading model from runs/None...
+/mnt/ceph-ssd/workspaces/ws/nim00020/u14148-MIDL/baseline/old_generalist/trackastra_y/trackastra/.models/general_2d already downloaded, skipping.
+INFO:trackastra.model.model:Loading model state from /mnt/ceph-ssd/workspaces/ws/nim00020/u14148-MIDL/baseline/old_generalist/trackastra_y/trackastra/.models/general_2d/model.pt
+INFO:trackastra.model.model_api:Using device cpu
+INFO:trackastra.model.model_api:Default batch size = 1 for model on cpu.
+{'coord_dim': 2, 'feat_dim': 7, 'pos_embed_per_dim': 32, 'd_model': 320, 'nhead': 4, 'num_encoder_layers': 6, 'num_decoder_layers': 6, 'window': 4, 'dropout': 0.0, 'attn_positional_bias': 'rope', 'attn_positional_bias_n_spatial': 16, 'spatial_pos_cutoff': 256, 'feat_embed_per_dim': 8, 'causal_norm': 'quiet_softmax', 'attn_dist_mode': 'v0'}
+Masks loaded: (92, 700, 1100)                                                                                                           
+Running tracking...
+INFO:trackastra.model.model_api:Predicting weights for candidate graph                                                                  
+INFO:trackastra.data.wrfeat:Extracting features from 92 detections
+INFO:trackastra.data.wrfeat:Using single process for feature extraction
+Extracting features: 100%|██████████████████████████████████████████████████████████████████████████████| 92/92 [00:04<00:00, 21.26it/s]
+INFO:trackastra.model.model_api:Building windows
+Building windows: 100%|██████████████████████████████████████████████████████████████████████████████| 89/89 [00:00<00:00, 15444.48it/s]
+INFO:trackastra.model.model_api:Predicting windows
+Computing associations: 100%|███████████████████████████████████████████████████████████████████████████| 89/89 [01:17<00:00,  1.15it/s]
+INFO:trackastra.model.model_api:Running greedy tracker
+INFO:trackastra.tracking.tracking:Build candidate graph with delta_t=1
+INFO:trackastra.tracking.tracking:Added 25420 vertices, 25248 edges                                                                     
+INFO:trackastra.tracking.tracking:Running greedy tracker
+Greedily matched edges:  99%|█████████████████████████████████████████████████████████████████▌| 25070/25248 [00:00<00:00, 66778.91it/s]
+Converting to CTC format...
+Converting graph to CTC results: 100%|██████████████████████████████████████████████████████████████| 638/638 [00:00<00:00, 3302.58it/s]
+Saving masks: 100%|████████████████████████████████████████████████████████████████████████████████████| 92/92 [00:00<00:00, 325.32it/s]
+Loading ground truth data...
+Loading TIFFs: 100%|███████████████████████████████████████████████████████████████████████████████████| 91/91 [00:00<00:00, 332.86it/s]
+Computing node attributes: 100%|████████████████████████████████████████████████████████████████████████| 92/92 [00:01<00:00, 84.98it/s]
+INFO:traccuracy.loaders._ctc:Running CTC format checks
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=28.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=31.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=33.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=44.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=54.
+Loading predicted data...
+Loading TIFFs: 100%|███████████████████████████████████████████████████████████████████████████████████| 91/91 [00:00<00:00, 716.49it/s]
+Computing node attributes: 100%|████████████████████████████████████████████████████████████████████████| 92/92 [00:01<00:00, 80.12it/s]
+INFO:traccuracy.loaders._ctc:Running CTC format checks
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=28.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=31.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=33.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=44.
+WARNING:traccuracy.loaders._ctc:1 non-connected masks at t=54.
+Computing metrics...
+Matching frames: 100%|█████████████████████████████████████████████████████████████████████████████████| 92/92 [00:00<00:00, 214.92it/s]
+INFO:traccuracy.matchers._base:Matched 25407 out of 25420 ground truth nodes.
+INFO:traccuracy.matchers._base:Matched 25407 out of 25407 predicted nodes.
+Evaluating nodes: 100%|███████████████████████████████████████████████████████████████████████| 25407/25407 [00:00<00:00, 212658.11it/s]
+Evaluating FP edges: 100%|████████████████████████████████████████████████████████████████████| 25069/25069 [00:00<00:00, 280955.43it/s]
+Evaluating FN edges: 100%|████████████████████████████████████████████████████████████████████| 25168/25168 [00:00<00:00, 375572.79it/s]
+Results for epoch None:
+  TRA: 0.998310
+  DET: 0.999489
+  LNK: 0.990371
+
+============================================================
+Results saved to output.csv
+============================================================
+epoch      TRA      DET      LNK
+ None 0.998310 0.999489 0.990371
+
+Summary Statistics:
+Best TRA: 0.998310 (epoch None)
+Best DET: 0.999489 (epoch None)
+Best LNK: 0.990371 (epoch None)
+

@@ -1,0 +1,60 @@
+(/mnt/ceph-ssd/workspaces/ws/nim00020/u14148-MIDL/baseline/old_generalist/conda_env) [nim00020] u14148@ggpu102 scripts $ python eval_combined.py 
+
+============================================================
+Processing epoch None: None
+============================================================
+Loading model from runs/None...
+/mnt/ceph-ssd/workspaces/ws/nim00020/u14148-MIDL/baseline/old_generalist/trackastra_y/trackastra/.models/general_2d already downloaded, skipping.
+INFO:trackastra.model.model:Loading model state from /mnt/ceph-ssd/workspaces/ws/nim00020/u14148-MIDL/baseline/old_generalist/trackastra_y/trackastra/.models/general_2d/model.pt
+INFO:trackastra.model.model_api:Using device cpu
+INFO:trackastra.model.model_api:Default batch size = 1 for model on cpu.
+{'coord_dim': 2, 'feat_dim': 7, 'pos_embed_per_dim': 32, 'd_model': 320, 'nhead': 4, 'num_encoder_layers': 6, 'num_decoder_layers': 6, 'window': 4, 'dropout': 0.0, 'attn_positional_bias': 'rope', 'attn_positional_bias_n_spatial': 16, 'spatial_pos_cutoff': 256, 'feat_embed_per_dim': 8, 'causal_norm': 'quiet_softmax', 'attn_dist_mode': 'v0'}
+Masks loaded: (84, 512, 512)                                                                                                            
+Running tracking...
+INFO:trackastra.model.model_api:Predicting weights for candidate graph                                                                  
+INFO:trackastra.data.wrfeat:Extracting features from 84 detections
+INFO:trackastra.data.wrfeat:Using single process for feature extraction
+Extracting features: 100%|█████████████████████████████████████████████████████████████████████████████| 84/84 [00:00<00:00, 216.77it/s]
+INFO:trackastra.model.model_api:Building windows
+Building windows: 100%|██████████████████████████████████████████████████████████████████████████████| 81/81 [00:00<00:00, 21411.65it/s]
+INFO:trackastra.model.model_api:Predicting windows
+Computing associations: 100%|███████████████████████████████████████████████████████████████████████████| 81/81 [00:02<00:00, 34.22it/s]
+INFO:trackastra.model.model_api:Running greedy tracker
+INFO:trackastra.tracking.tracking:Build candidate graph with delta_t=1
+INFO:trackastra.tracking.tracking:Added 1030 vertices, 1009 edges                                                                       
+INFO:trackastra.tracking.tracking:Running greedy tracker
+Greedily matched edges:  99%|██████████████████████████████████████████████████████████████████▍| 1001/1009 [00:00<00:00, 213229.98it/s]
+Converting to CTC format...
+Converting graph to CTC results: 100%|████████████████████████████████████████████████████████████████| 31/31 [00:00<00:00, 3376.09it/s]
+Saving masks: 100%|███████████████████████████████████████████████████████████████████████████████████| 84/84 [00:00<00:00, 1151.44it/s]
+Loading ground truth data...
+Loading TIFFs: 100%|███████████████████████████████████████████████████████████████████████████████████| 83/83 [00:00<00:00, 886.35it/s]
+Computing node attributes: 100%|███████████████████████████████████████████████████████████████████████| 84/84 [00:00<00:00, 770.58it/s]
+INFO:traccuracy.loaders._ctc:Running CTC format checks
+Loading predicted data...
+Loading TIFFs: 100%|██████████████████████████████████████████████████████████████████████████████████| 83/83 [00:00<00:00, 2206.95it/s]
+Computing node attributes: 100%|███████████████████████████████████████████████████████████████████████| 84/84 [00:00<00:00, 769.22it/s]
+INFO:traccuracy.loaders._ctc:Running CTC format checks
+Computing metrics...
+Matching frames: 100%|████████████████████████████████████████████████████████████████████████████████| 84/84 [00:00<00:00, 4668.92it/s]
+INFO:traccuracy.matchers._base:Matched 1030 out of 1030 ground truth nodes.
+INFO:traccuracy.matchers._base:Matched 1030 out of 1030 predicted nodes.
+Evaluating nodes: 100%|█████████████████████████████████████████████████████████████████████████| 1030/1030 [00:00<00:00, 226054.79it/s]
+Evaluating FP edges: 100%|██████████████████████████████████████████████████████████████████████| 1001/1001 [00:00<00:00, 277623.38it/s]
+Evaluating FN edges: 100%|██████████████████████████████████████████████████████████████████████| 1011/1011 [00:00<00:00, 413217.83it/s]
+Results for epoch None:
+  TRA: 0.997630
+  DET: 1.000000
+  LNK: 0.981536
+
+============================================================
+Results saved to output.csv
+============================================================
+epoch      TRA      DET      LNK
+ None 0.997630 1.000000 0.981536
+
+Summary Statistics:
+Best TRA: 0.997630 (epoch None)
+Best DET: 1.000000 (epoch None)
+Best LNK: 0.981536 (epoch None)
+
